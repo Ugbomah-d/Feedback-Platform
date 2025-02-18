@@ -1,11 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Main Page</title>
-</head>
-<body>
-  <h1>Nothing here but rabbits</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Main Page</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+  <body>
+    <!-- nav bar -->
+    <div class="nav-bar">
+      <div class="student-details-box">
+        <h2 class="student-details text">
+          Ugbomah, Daniel Timinepre
+        </h2>
+        <img class="avatar" src="./assets/avatar.png" alt="avatar" />
+      </div>
+    </div>
+
+    <!-- Main content container -->
+    <div class="main-container">
+      <!-- Contacts panel -->
+      <div class="contacts-panel">
+        <h3>Contacts</h3>
+        <ul class="contacts-list">
+          <li>Contact 1</li>
+          <li>Contact 2</li>
+          <li>Contact 3</li>
+        </ul>
+      </div>
+
+      <!-- Chat container -->
+      <div class="chat-container">
+
+      <div class="messages">
+        <!-- Messages will be dynamically inserted here -->
+      </div>
+      <div class="message-input">
+        <input type="text" id="messageInput" placeholder="Type your message..." />
+        <button id="sendButton">Send</button>
+      </div>
+    </div>
+
+    </div> <!-- End of main-container -->
+    <script src="messaging.js"></script>
+  </body>
+
 </html>
