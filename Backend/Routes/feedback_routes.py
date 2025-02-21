@@ -21,7 +21,7 @@ def feedback():
 
         # Insert feedback into MongoDB
         feedback_id = feedback_collection.insert_one({"message": data["message"],
-                                                       "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")})
+            "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")})
 
         return jsonify({"success": True, "message": "Feedback stored!", "id": str(feedback_id)}), 201
 

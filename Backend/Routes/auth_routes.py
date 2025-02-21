@@ -51,7 +51,7 @@ def register_user():
 
     return jsonify({"message": "User registered successfully"}), 201
 
-# ✅ Login Route
+#Login Route
 
 @auth_routes.route("/api/login", methods=["POST"])
 def login():
@@ -86,12 +86,7 @@ def logout():
     logout_user()
     return jsonify({"message": "Logout successful"}), 200
 
-# Protected Route Example
-@auth_routes.route("/api/protected", methods=["GET"])
-@login_required
-def protected():
-    return jsonify({"message": f"Welcome, {current_user.username}! This is a protected route."}), 200
-
+# Generates csrf token
 @auth_routes.route("/csrf-token", methods=["GET"])
 def get_csrf_token():
     token =  generate_csrf()  # Generate CSRF token

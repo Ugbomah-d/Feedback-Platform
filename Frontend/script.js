@@ -31,7 +31,7 @@ document
 
     try {
       // Fetch CSRF token first
-      const csrfResponse = await fetch("http://localhost:5000/csrf-token", {
+      const csrfResponse = await fetch("/csrf-token", {
         method: "GET",
       });
 
@@ -39,7 +39,7 @@ document
       const csrfToken = csrfData.csrf_token;
 
       // Now send the login request
-      const response = await fetch("http://localhost:5000/api/login", {
+      const response = await fetch("/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -88,7 +88,7 @@ document
 
     try {
       // Fetch CSRF token first
-      const csrfResponse = await fetch("http://localhost:5000/csrf-token", {
+      const csrfResponse = await fetch("/csrf-token", {
         method: "GET",
       });
 
@@ -104,7 +104,7 @@ document
       console.log("Sending payload:", payload);
 
       // Send the signup request
-      const response = await fetch("http://localhost:5000/register", {
+      const response = await fetch("/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
