@@ -3,46 +3,137 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Main Page</title>
+    <title>ChatBox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script
+      src="https://kit.fontawesome.com/0b7df4284b.js"
+      crossorigin="anonymous"
+    ></script>
+
     <link rel="stylesheet" href="./styles/main.css" />
   </head>
   <body>
-    <!-- nav bar -->
-    <div class="nav-bar">
-      <div class="student-details-box">
-        <h2 class="student-details text">
-          Ugbomah, Daniel Timinepre
-        </h2>
-        <img class="avatar" src="./assets/avatar.png" alt="avatar" />
+    <div class="chatBox">
+      <div class="grid-item item-1 navbar">
+        <i class="fa-solid fa-house"></i>
+        <i class="fa-regular fa-file-lines"></i>
+        <i class="fa-solid fa-comment"></i>
+        <i class="fa-solid fa-calendar"></i>
+        <i class="fa-solid fa-book-open"></i>
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      </div>
+
+      <div class="grid-item item-2 sidebar">
+        <div class="sectionHeader">
+          <h2>Messages</h2>
+          <p><a href="">+ Create New</a></p>
+          <input
+            type="text"
+            id="search"
+            name="search"
+            placeholder="Search Message"
+          />
+          <label for="search"
+            ><i class="fa-solid fa-magnifying-glass"></i
+          ></label>
+        </div>
+
+        <div class="contact-container">
+          <br />
+          <br />
+          <h5>All Messages</h5>
+          <div class="contact-list">
+            <div>
+              <img src="./assets/hero-img.png" alt="" />
+              <p>Eze Bekee</p>
+            </div>
+
+            <div>
+              <img src="./assets/IMG-20210807-WA0009.jpg" alt="" />
+              <p>George George</p>
+            </div>
+
+            <div>
+              <img src="./assets/IMG-20210810-WA0006.jpg" alt="" />
+              <p>Chisom Micah</p>
+            </div>
+
+            <div>
+              <img src="./assets/hero-img.png" alt="" />
+              <p>David Esimike</p>
+            </div>
+
+            <div>
+              <img src="./assets/hero-img.png" alt="" />
+              <p>Eze Bekee</p>
+            </div>
+
+            <div>
+              <img src="./assets/IMG-20210810-WA0006.jpg" alt="" />
+              <p>Chisom Micah</p>
+            </div>
+            <div>
+              <img src="./assets/hero-img.png" alt="" />
+              <p>David Esimike</p>
+            </div>
+
+            <div>
+              <img src="./assets/hero-img.png" alt="" />
+              <p>David Esimike</p>
+            </div>
+            <div>
+              <img src="./assets/hero-img.png" alt="" />
+              <p>Eze Bekee</p>
+            </div>
+            <div>
+              <img src="./assets/IMG-20210810-WA0006.jpg" alt="" />
+              <p>Chisom Micah</p>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-item item-3 header">
+        <div>
+          <div class="img-container">
+            <img src="assets/IMG-20230618-WA0000.jpg" alt="" />
+          </div>
+          <h3>Ugbomah Daniel</h3>
+        </div>
+
+        <div>
+          <i class="fa-solid fa-phone"></i>
+          <i class="fa-solid fa-video"></i>
+          <i class="fa-solid fa-ellipsis"></i>
+        </div>
+      </div>
+
+      <div class="grid-item item-4 content">
+        <div class="messages"></div>
+      </div>
+
+      <div class="grid-item item-5 footer">
+        <i class="fa-regular fa-face-smile"></i>
+        <i class="fa-solid fa-paperclip"></i>
+        <i class="fa-regular fa-image"></i>
+        <i class="fa-regular fa-file-lines"></i>
+        <i class="fa-solid fa-ellipsis"></i>
+
+        <input
+          type="text"
+          id="messageInput"
+          name="text"
+          placeholder="Your message here"
+        />
+        <label for="text" id="sendButton"
+          ><i class="fa-solid fa-paper-plane"></i
+        ></label>
       </div>
     </div>
 
-    <!-- Main content container -->
-    <div class="main-container">
-      <!-- Contacts panel -->
-      <div class="contacts-panel">
-        <h3>Contacts</h3>
-        <ul class="contacts-list">
-          <li>Contact 1</li>
-          <li>Contact 2</li>
-          <li>Contact 3</li>
-        </ul>
-      </div>
-
-      <!-- Chat container -->
-      <div class="chat-container">
-
-      <div class="messages">
-        <!-- Messages will be dynamically inserted here -->
-      </div>
-      <div class="message-input">
-        <input type="text" id="messageInput" placeholder="Type your message..." />
-        <button id="sendButton">Send</button>
-      </div>
-    </div>
-
-    </div> <!-- End of main-container -->
+    <!-- End of main-container -->
     <script src="messaging.js"></script>
   </body>
-
 </html>

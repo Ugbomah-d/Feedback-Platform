@@ -1,19 +1,20 @@
 from flask import Flask, send_from_directory, session # type: ignore
 from flask_cors import CORS # type: ignore
 import secrets
-
+from flask_socketio import SocketIO, emit # type: ignore
 import os
 from flask_login import LoginManager
 from flask_wtf.csrf import CSRFProtect
 from Routes.auth_routes import auth_routes
 from Routes.feedback_routes import feedback_routes
-from database import feedback_collection
+#from database import feedback_collection
 from Models.user_models import User
 
 app = Flask(__name__, static_folder="../Frontend", static_url_path="")
 app.config['SECRET_KEY'] = os.urandom(24)  # Ensure a secret key is set
 app.config['WTF_CSRF_TIME_LIMIT'] = None  # Allow CSRF tokens to persist longer
 app.config["WTF_CSRF_ENABLED"] = False
+socketio = SocketIO(app)
 
 
 
@@ -44,6 +45,12 @@ app.register_blueprint(auth_routes)
 def serve_index():
     return send_from_directory(app.static_folder, "index.html")
 
+# Event handler for receiving chat messages
+@socketio.on('chat message')
+def handle_chat_message(msg):
+    print('Received message: ' + msg)
+    # Broadcast the message to all connected clients
+    emit('chat message', msg, broadcast=True)
 
 
 @app.before_request
