@@ -14,7 +14,7 @@ app = Flask(__name__, static_folder="../Frontend", static_url_path="")
 app.config['SECRET_KEY'] = os.urandom(24)  # Ensure a secret key is set
 app.config['WTF_CSRF_TIME_LIMIT'] = None  # Allow CSRF tokens to persist longer
 app.config["WTF_CSRF_ENABLED"] = False
-socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 
 
@@ -45,12 +45,18 @@ app.register_blueprint(auth_routes)
 def serve_index():
     return send_from_directory(app.static_folder, "index.html")
 
+#Testing connection
+@socketio.on('connect')
+def connect():
+    print('User connected')
+
 # Event handler for receiving chat messages
 @socketio.on('chat message')
 def handle_chat_message(msg):
     print('Received message: ' + msg)
     # Broadcast the message to all connected clients
     emit('chat message', msg, broadcast=True)
+    print('Sent')
 
 
 @app.before_request
@@ -62,4 +68,4 @@ def set_csrf_token():
 
 if __name__ == '__main__':
 
-    app.run(host="0.0.0.0", port=5000,debug=True)
+    socketio.run(app, host="0.0.0.0", port=5000,debug=True)

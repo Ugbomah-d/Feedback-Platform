@@ -7,8 +7,7 @@
 }
 
 body{
-    overflow: hidden;
-   
+    overflow: hidden;   
 }
 
 .chatBox{
@@ -191,6 +190,8 @@ img{
     padding: 10px;
     margin: 10px;
     max-width: 600px;
+    justify-self: end;
+    align-items: end;
     align-self: flex-end;
     word-wrap: break-word; /* Ensures long words are broken and wrapped to the next line */
     white-space: pre-wrap; /* Preserves whitespace and wraps text to the next line */
@@ -198,7 +199,12 @@ img{
   
   
   .other-message {
-    background-color: #f0f0f0;
+    background-color: #ffffff;
     color: #000000;
+    padding: 10px;
+    margin: 10px;
+    max-width: 600px;
     align-self: flex-start;
+    word-wrap: break-word; /* Ensures long words are broken and wrapped to the next line */
+    white-space: pre-wrap;
   }
