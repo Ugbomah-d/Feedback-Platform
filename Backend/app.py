@@ -55,7 +55,7 @@ def connect():
 def handle_chat_message(msg):
     print('Received message: ' + msg)
     # Broadcast the message to all connected clients
-    emit('chat message', msg, broadcast=True)
+    emit('chat message', msg, broadcast=True, include_self=False)
     print('Sent')
 
 

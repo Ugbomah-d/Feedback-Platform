@@ -4,10 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const sendButton = document.getElementById('sendButton');
     const messagesContainer = document.querySelector('.messages');
 
-    var socket = io("http://127.0.0.1:5000");
+    var socket = io("https://r5chbk85-5000.uks1.devtunnels.ms");
 
     socket.on("connect", () => {
         console.log("Connected to server");
+        //addMessage(`You connnected with: ${socket.id}`);
     });
 
    
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const message = messageInput.value.trim();
         if (message) {
             addMessage(message);
-            socket.broadcast.emit("chat message", message);
+            socket.emit("chat message", message);
             messageInput.value = '';
         }
         
