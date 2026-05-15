@@ -1,13 +1,13 @@
-from flask import Flask, send_from_directory, session # type: ignore
-from flask_cors import CORS # type: ignore
+from flask import Flask, send_from_directory, session 
+from flask_cors import CORS 
 import secrets
-from flask_socketio import SocketIO, emit # type: ignore
+from flask_socketio import SocketIO, emit 
 import os
 from flask_login import LoginManager
 from flask_wtf.csrf import CSRFProtect
 from Routes.auth_routes import auth_routes
 from Routes.feedback_routes import feedback_routes
-#from database import feedback_collection
+from database import users_collection
 from Models.user_models import User
 
 app = Flask(__name__, static_folder="../Frontend", static_url_path="")

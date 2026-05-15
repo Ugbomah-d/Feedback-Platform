@@ -23,7 +23,7 @@ class LoginForm(FlaskForm):
 @auth_routes.route("/register", methods=["POST"])
 def register_user():
 
-    print("Request received:", request.data)  # Debugging
+    
     data = request.get_json()
     print("Parsed data:", data)
 
@@ -39,7 +39,7 @@ def register_user():
 
      # Generate a unique fs_uniquifier
     fs_uniquifier = str(uuid.uuid4())
-
+    
     # Store user in MongoDB
     users_collection.insert_one({
         "username": data["username"],
@@ -56,7 +56,7 @@ def register_user():
 @auth_routes.route("/api/login", methods=["POST"])
 def login():
     try:
-        data = request.get_json(force=True)
+        data = request.get_json()
         print("Received JSON data:", data)  # Debugging output
     except Exception as e:
         print("Error parsing JSON:", str(e))
@@ -67,6 +67,7 @@ def login():
 
     if "username" not in data or "password" not in data:
         return jsonify({"error": "Invalid input"}), 400
+    
 
     user = User.get_user_by_username(data["username"])
     if not user:

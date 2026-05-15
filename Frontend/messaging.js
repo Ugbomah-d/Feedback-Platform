@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const sendButton = document.getElementById('sendButton');
     const messagesContainer = document.querySelector('.messages');
 
-    var socket = io("https://r5chbk85-5000.uks1.devtunnels.ms");
+    var socket = io("http://127.0.0.1:5000");
 
     socket.on("connect", () => {
         console.log("Connected to server");
@@ -37,15 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     
-
-    // sendButton.addEventListener('click', function() {
-    //     const message = messageInput.value.trim();
-    //     if (message) {
-    //         addMessage(message);
-    //          // Emit the message to the server
-    //         messageInput.value = '';
-    //     }
-    // });
 
     // Handle Enter key press
     messageInput.addEventListener('keypress', function(e) {

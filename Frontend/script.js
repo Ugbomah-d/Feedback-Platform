@@ -13,6 +13,7 @@ document
     event.preventDefault();
     document.getElementById("signupForm").style.display = "none";
     document.getElementById("loginForm").style.display = "block";
+    
   });
 
 // Handle login form submission
@@ -28,29 +29,29 @@ document
       alert("Please fill in both fields.");
       return;
     }
-
+    
     try {
-      // Fetch CSRF token first
-      const csrfResponse = await fetch("/csrf-token", {
-        method: "GET",
-      });
+      // // Fetch CSRF token first
+      // const csrfResponse = await fetch("/csrf-token", {
+      //   method: "GET",
+      // });
 
-      const csrfData = await csrfResponse.json();
-      const csrfToken = csrfData.csrf_token;
+      // const csrfData = await csrfResponse.json();
+      // const csrfToken = csrfData.csrf_token;
 
       // Now send the login request
       const response = await fetch("/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-CSRFToken": csrfToken, // Send CSRF token in header
+          //"X-CSRFToken": csrfToken, // Send CSRF token in header
         },
 
         body: JSON.stringify({ username, password }),
       });
-
+      
       const data = await response.json();
-
+      
       if (!response.ok) {
         throw new Error(data.error || "Login failed");
       }
@@ -87,14 +88,14 @@ document
     }
 
     try {
-      // Fetch CSRF token first
-      const csrfResponse = await fetch("/csrf-token", {
-        method: "GET",
-      });
+      // // Fetch CSRF token first
+      // const csrfResponse = await fetch("/csrf-token", {
+      //   method: "GET",
+      // });
 
-      const csrfData = await csrfResponse.json();
-      console.log("Recived Token", csrfData);
-      const csrfToken = csrfData.csrf_token;
+      // const csrfData = await csrfResponse.json();
+      // console.log("Recived Token", csrfData);
+      // const csrfToken = csrfData.csrf_token;
 
       const payload = {
         username: username,
