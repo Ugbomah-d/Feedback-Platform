@@ -3,112 +3,290 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ChatBox</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>Loop | Messages</title>
+    <link rel="stylesheet" href="./styles/main.css" />
     <script
       src="https://kit.fontawesome.com/0b7df4284b.js"
       crossorigin="anonymous"
     ></script>
-
-    <link rel="stylesheet" href="./styles/main.css" />
   </head>
   <body>
-    <div class="chatBox">
-      <div class="grid-item item-1 navbar">
-        <i class="fa-solid fa-house"></i>
-        <i class="fa-regular fa-file-lines"></i>
-        <i class="fa-solid fa-comment"></i>
-        <i class="fa-solid fa-calendar"></i>
-        <i class="fa-solid fa-book-open"></i>
-        <i class="fa-solid fa-arrow-right-from-bracket"></i>
-      </div>
+    <main class="app-shell">
+      <aside class="app-nav" aria-label="Primary navigation">
+        <div>
+          <a class="brand-button" href="./main.html" aria-label="Loop home">
+            <i class="fa-solid fa-sparkles"></i>
+          </a>
+          <nav class="nav-stack" aria-label="Workspace">
+            <a href="#" class="nav-item active" title="Messages">
+              <i class="fa-regular fa-comment-dots"></i>
+            </a>
+            <a href="#" class="nav-item" title="Contacts">
+              <i class="fa-solid fa-users"></i>
+            </a>
+            <a href="#" class="nav-item" title="Activity">
+              <i class="fa-regular fa-bell"></i>
+            </a>
+            <a href="#" class="nav-item" title="Settings">
+              <i class="fa-solid fa-gear"></i>
+            </a>
+          </nav>
+        </div>
 
-      <div class="grid-item item-2 sidebar">
-        <div class="sectionHeader">
-          <h2>Messages</h2>
-          <p><a href="">+ Create New</a></p>
+        <div class="nav-stack">
+          <a href="#" class="nav-item" title="Help">
+            <i class="fa-regular fa-circle-question"></i>
+          </a>
+          <a href="./index.html" class="nav-item" title="Sign out">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          </a>
+          <span class="profile-chip" title="You">YO</span>
+        </div>
+      </aside>
+
+      <section class="conversation-panel" aria-label="Conversations">
+        <header class="panel-header">
+          <div>
+            <h1>Messages</h1>
+            <p><span id="conversationCount">6</span> conversations</p>
+          </div>
+          <button class="icon-action primary" type="button" aria-label="New message">
+            <i class="fa-regular fa-pen-to-square"></i>
+          </button>
+        </header>
+
+        <div class="search-shell">
+          <i class="fa-solid fa-magnifying-glass"></i>
           <input
-            type="text"
+            type="search"
             id="search"
             name="search"
-            placeholder="Search Message"
+            placeholder="Search messages or people"
+            autocomplete="off"
           />
-          <label for="search"
-            ><i class="fa-solid fa-magnifying-glass"></i
-          ></label>
         </div>
 
-        <div class="contact-container">
-          <br />
-          <br />
-          <h5>All Messages</h5>
-          <div class="contact-list">
-            <div>
-              <img src="./assets/hero-img.png" alt="" />
-              <p>Eze Bekee</p>
-            </div>
+        <div class="contact-list" id="contactList">
+          <button
+            class="contact-card active"
+            type="button"
+            data-contact-id="1"
+            data-name="Maya Chen"
+            data-role="Design partner"
+            data-initials="MC"
+            data-online="true"
+          >
+            <span class="avatar online">MC</span>
+            <span class="contact-copy">
+              <span class="contact-row">
+                <strong>Maya Chen</strong>
+                <small>2m</small>
+              </span>
+              <span class="contact-row">
+                <span class="preview">Left a few notes on the prototype</span>
+                <span class="unread">2</span>
+              </span>
+            </span>
+          </button>
 
-            <div>
-              <img src="./assets/IMG-20210807-WA0009.jpg" alt="" />
-              <p>George George</p>
-            </div>
+          <button
+            class="contact-card"
+            type="button"
+            data-contact-id="2"
+            data-name="Jordan Park"
+            data-role="Study group"
+            data-initials="JP"
+            data-online="true"
+          >
+            <span class="avatar online">JP</span>
+            <span class="contact-copy">
+              <span class="contact-row">
+                <strong>Jordan Park</strong>
+                <small>18m</small>
+              </span>
+              <span class="contact-row">
+                <span class="preview">Could you review my draft tonight?</span>
+              </span>
+            </span>
+          </button>
 
-            <div>
-              <img src="./assets/IMG-20210810-WA0006.jpg" alt="" />
-              <p>Chisom Micah</p>
-            </div>
+          <button
+            class="contact-card"
+            type="button"
+            data-contact-id="3"
+            data-name="Prof. Alvarez"
+            data-role="Mentor"
+            data-initials="PA"
+            data-online="false"
+          >
+            <span class="avatar">PA</span>
+            <span class="contact-copy">
+              <span class="contact-row">
+                <strong>Prof. Alvarez</strong>
+                <small>1h</small>
+              </span>
+              <span class="contact-row">
+                <span class="preview">Great progress this week.</span>
+              </span>
+            </span>
+          </button>
 
-            <div>
-              <img src="./assets/hero-img.png" alt="" />
-              <p>David Esimike</p>
-            </div>
+          <button
+            class="contact-card"
+            type="button"
+            data-contact-id="4"
+            data-name="Capstone Team"
+            data-role="Group - 5 members"
+            data-initials="CT"
+            data-online="false"
+          >
+            <span class="avatar">CT</span>
+            <span class="contact-copy">
+              <span class="contact-row">
+                <strong>Capstone Team</strong>
+                <small>3h</small>
+              </span>
+              <span class="contact-row">
+                <span class="preview">Sam pushed the new build.</span>
+                <span class="unread">5</span>
+              </span>
+            </span>
+          </button>
 
-            
+          <button
+            class="contact-card"
+            type="button"
+            data-contact-id="5"
+            data-name="Riya Patel"
+            data-role="Peer reviewer"
+            data-initials="RP"
+            data-online="false"
+          >
+            <span class="avatar">RP</span>
+            <span class="contact-copy">
+              <span class="contact-row">
+                <strong>Riya Patel</strong>
+                <small>Yesterday</small>
+              </span>
+              <span class="contact-row">
+                <span class="preview">Thanks for the feedback!</span>
+              </span>
+            </span>
+          </button>
+
+          <button
+            class="contact-card"
+            type="button"
+            data-contact-id="6"
+            data-name="Noah Williams"
+            data-role="Classmate"
+            data-initials="NW"
+            data-online="false"
+          >
+            <span class="avatar">NW</span>
+            <span class="contact-copy">
+              <span class="contact-row">
+                <strong>Noah Williams</strong>
+                <small>Mon</small>
+              </span>
+              <span class="contact-row">
+                <span class="preview">See you in class.</span>
+              </span>
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <section class="chat-panel" aria-label="Active conversation">
+        <header class="chat-header">
+          <div class="chat-person">
+            <button class="mobile-back" type="button" aria-label="Back to conversations">
+              <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <span class="avatar online" id="activeAvatar">MC</span>
+            <span>
+              <strong id="activeName">Maya Chen</strong>
+              <small id="activeStatus">Active now</small>
+            </span>
+          </div>
+          <div class="header-actions">
+            <button class="icon-action" type="button" aria-label="Call">
+              <i class="fa-solid fa-phone"></i>
+            </button>
+            <button class="icon-action" type="button" aria-label="Video">
+              <i class="fa-solid fa-video"></i>
+            </button>
+            <button class="icon-action" type="button" aria-label="Details">
+              <i class="fa-solid fa-circle-info"></i>
+            </button>
+          </div>
+        </header>
+
+        <div class="messages" aria-live="polite">
+          <div class="day-pill">Today</div>
+          <div class="message-row other">
+            <span class="mini-avatar">MC</span>
+            <div class="message other-message">
+              <p>Hey! Took a pass through your prototype this morning.</p>
+              <small>9:14 AM</small>
+            </div>
+          </div>
+          <div class="message-row other grouped">
+            <span class="mini-avatar spacer"></span>
+            <div class="message other-message feedback-message">
+              <span class="feedback-label">
+                <i class="fa-solid fa-sparkles"></i> Feedback
+              </span>
+              <p>
+                One thought: the empty state could use a friendlier nudge and a
+                clearer next action.
+              </p>
+              <small>9:15 AM</small>
+            </div>
+          </div>
+          <div class="message-row user">
+            <div class="message user-message">
+              <p>That's a great call. I'll sketch a couple of variations today.</p>
+              <small>9:22 AM</small>
+            </div>
+          </div>
+          <div class="message-row other">
+            <span class="mini-avatar">MC</span>
+            <div class="message other-message feedback-message">
+              <span class="feedback-label">
+                <i class="fa-solid fa-sparkles"></i> Feedback
+              </span>
+              <p>The settings icons are not quite obvious. Labels would help.</p>
+              <small>9:31 AM</small>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="grid-item item-3 header">
-        <div>
-          <div class="img-container">
-            <img src="assets/IMG-20230618-WA0000.jpg" alt="" />
+        <footer class="composer">
+          <div class="composer-shell">
+            <button class="icon-action" type="button" aria-label="Attach">
+              <i class="fa-solid fa-paperclip"></i>
+            </button>
+            <input
+              type="text"
+              id="messageInput"
+              name="text"
+              placeholder="Message Maya..."
+              autocomplete="off"
+            />
+            <button class="icon-action" type="button" aria-label="Emoji">
+              <i class="fa-regular fa-face-smile"></i>
+            </button>
+            <button class="send-action" id="sendButton" type="button" aria-label="Send">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Send</span>
+            </button>
           </div>
-          <h3>Ugbomah Daniel</h3>
-        </div>
+        </footer>
+      </section>
+    </main>
 
-        <div>
-          <i class="fa-solid fa-phone"></i>
-          <i class="fa-solid fa-video"></i>
-          <i class="fa-solid fa-ellipsis"></i>
-        </div>
-      </div>
-
-      <div class="grid-item item-4 content">
-        <div class="messages"></div>
-      </div>
-
-      <div class="grid-item item-5 footer">
-        <i class="fa-regular fa-face-smile"></i>
-        <i class="fa-solid fa-paperclip"></i>
-        <i class="fa-regular fa-image"></i>
-        <i class="fa-regular fa-file-lines"></i>
-        <i class="fa-solid fa-ellipsis"></i>
-
-        <input
-          type="text"
-          id="messageInput"
-          name="text"
-          placeholder="Your message here"
-        />
-        <label for="text" id="sendButton"
-          ><i class="fa-solid fa-paper-plane"></i
-        ></label>
-      </div>
-    </div>
-
-    <!-- End of main-container -->
+    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
     <script src="messaging.js"></script>
-    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>  
   </body>
 </html>

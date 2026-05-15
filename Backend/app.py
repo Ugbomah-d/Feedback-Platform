@@ -1,27 +1,30 @@
-from flask import Flask, send_from_directory, session 
-from flask_cors import CORS 
-import secrets
-from flask_socketio import SocketIO, emit 
 import os
+import secrets
+from pathlib import Path
+
+from dotenv import load_dotenv
+from flask import Flask, send_from_directory, session
+from flask_cors import CORS
 from flask_login import LoginManager
+from flask_socketio import SocketIO, emit
 from flask_wtf.csrf import CSRFProtect
+
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+
 from Routes.auth_routes import auth_routes
 from Routes.feedback_routes import feedback_routes
 from database import users_collection
 from Models.user_models import User
 
 app = Flask(__name__, static_folder="../Frontend", static_url_path="")
-app.config['SECRET_KEY'] = os.urandom(24)  # Ensure a secret key is set
-app.config['WTF_CSRF_TIME_LIMIT'] = None  # Allow CSRF tokens to persist longer
-app.config["WTF_CSRF_ENABLED"] = False
-socketio = SocketIO(app, cors_allowed_origins="*")
+app.config["SECRET_KEY"] = os.getenv("FLASK_SECRET_KEY", os.urandom(24))
+app.config["WTF_CSRF_TIME_LIMIT"] = None
+app.config["WTF_CSRF_ENABLED"] = os.getenv("WTF_CSRF_ENABLED", "False").lower() == "true"
 
-
+cors_origins = os.getenv("SOCKET_CORS_ORIGINS", "*")
+socketio = SocketIO(app, cors_allowed_origins=cors_origins)
 
 CORS(app, supports_credentials=True)
-
-# Secret key for CSRF protection & authentication
-app.config["SECRET_KEY"] = "supersecretkey"
 
 # Initialize Flask-Login
 login_manager = LoginManager()
@@ -67,5 +70,10 @@ def set_csrf_token():
 # print(session)
 
 if __name__ == '__main__':
-
-    socketio.run(app, host="0.0.0.0", port=5000,debug=True)
+    socketio.run(
+        app,
+        host=os.getenv("FLASK_HOST", "0.0.0.0"),
+        port=int(os.getenv("FLASK_PORT", "5000")),
+        debug=os.getenv("FLASK_DEBUG", "True").lower() == "true",
+        allow_unsafe_werkzeug=os.getenv("ALLOW_UNSAFE_WERKZEUG", "True").lower() == "true",
+    )

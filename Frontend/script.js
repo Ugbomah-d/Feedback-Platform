@@ -1,133 +1,116 @@
-// Toggle between login and signup forms
-document
-  .getElementById("signupLink")
-  .addEventListener("click", function (event) {
-    event.preventDefault();
-    document.getElementById("loginForm").style.display = "none";
-    document.getElementById("signupForm").style.display = "block";
+const loginForm = document.getElementById("loginForm");
+const signupForm = document.getElementById("signupForm");
+const signupLink = document.getElementById("signupLink");
+const loginLink = document.getElementById("loginLink");
+const authTabs = document.querySelectorAll("[data-auth-tab]");
+
+function setAuthMode(mode) {
+  const showSignup = mode === "signup";
+  loginForm.classList.toggle("active", !showSignup);
+  signupForm.classList.toggle("active", showSignup);
+
+  authTabs.forEach((tab) => {
+    tab.classList.toggle("active", tab.dataset.authTab === mode);
   });
+}
 
-document
-  .getElementById("loginLink")
-  .addEventListener("click", function (event) {
-    event.preventDefault();
-    document.getElementById("signupForm").style.display = "none";
-    document.getElementById("loginForm").style.display = "block";
-    
+signupLink.addEventListener("click", function (event) {
+  event.preventDefault();
+  setAuthMode("signup");
+});
+
+loginLink.addEventListener("click", function (event) {
+  event.preventDefault();
+  setAuthMode("login");
+});
+
+authTabs.forEach((tab) => {
+  tab.addEventListener("click", function () {
+    setAuthMode(tab.dataset.authTab);
   });
+});
 
-// Handle login form submission
-document
-  .getElementById("loginForm")
-  .addEventListener("submit", async function (event) {
-    event.preventDefault();
+loginForm.addEventListener("submit", async function (event) {
+  event.preventDefault();
 
-    const username = document.getElementById("username").value.trim();
-    const password = document.getElementById("password").value.trim();
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const submitButton = loginForm.querySelector("button[type='submit']");
 
-    if (!username || !password) {
-      alert("Please fill in both fields.");
-      return;
-    }
-    
-    try {
-      // // Fetch CSRF token first
-      // const csrfResponse = await fetch("/csrf-token", {
-      //   method: "GET",
-      // });
+  if (!username || !password) {
+    alert("Please fill in both fields.");
+    return;
+  }
 
-      // const csrfData = await csrfResponse.json();
-      // const csrfToken = csrfData.csrf_token;
+  submitButton.disabled = true;
 
-      // Now send the login request
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          //"X-CSRFToken": csrfToken, // Send CSRF token in header
-        },
+  try {
+    const response = await fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ username, password }),
+    });
 
-        body: JSON.stringify({ username, password }),
-      });
-      
-      const data = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(data.error || "Login failed");
-      }
+    const data = await response.json();
 
-      console.log("Login successful:", data);
-      window.location.href = "./main.html";
-    } catch (error) {
-      console.error("Error:", error);
-      alert(error.message);
-    }
-  });
-
-// Handle signup form submission
-document
-  .getElementById("signupForm")
-  .addEventListener("submit", async function (event) {
-    event.preventDefault();
-
-    const username = document.getElementById("signupUsername").value.trim();
-    const email = document.getElementById("signupEmail").value.trim();
-    const password = document.getElementById("signupPassword").value.trim();
-    const confirmPassword = document
-      .getElementById("confirmPassword")
-      .value.trim();
-
-    if (!username || !email || !password || !confirmPassword) {
-      alert("Please fill in all fields.");
-      return;
+    if (!response.ok) {
+      throw new Error(data.error || "Login failed");
     }
 
-    if (password !== confirmPassword) {
-      alert("Passwords do not match.");
-      return;
+    window.location.href = "./main.html";
+  } catch (error) {
+    alert(error.message);
+  } finally {
+    submitButton.disabled = false;
+  }
+});
+
+signupForm.addEventListener("submit", async function (event) {
+  event.preventDefault();
+
+  const username = document.getElementById("signupUsername").value.trim();
+  const email = document.getElementById("signupEmail").value.trim();
+  const password = document.getElementById("signupPassword").value.trim();
+  const confirmPassword = document.getElementById("confirmPassword").value.trim();
+  const submitButton = signupForm.querySelector("button[type='submit']");
+
+  if (!username || !email || !password || !confirmPassword) {
+    alert("Please fill in all fields.");
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    alert("Passwords do not match.");
+    return;
+  }
+
+  submitButton.disabled = true;
+
+  try {
+    const response = await fetch("/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ username, email, password }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Signup failed");
     }
 
-    try {
-      // // Fetch CSRF token first
-      // const csrfResponse = await fetch("/csrf-token", {
-      //   method: "GET",
-      // });
-
-      // const csrfData = await csrfResponse.json();
-      // console.log("Recived Token", csrfData);
-      // const csrfToken = csrfData.csrf_token;
-
-      const payload = {
-        username: username,
-        email: document.getElementById("signupEmail").value.trim(),
-        password: password,
-      };
-      console.log("Sending payload:", payload);
-
-      // Send the signup request
-      const response = await fetch("/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          //"X-CSRFToken": csrfToken,
-        },
-        credentials: "include",
-        body: JSON.stringify(payload),
-      }); 
-
-      const data = await response.json();
-      console.log(payload);
-      if (!response.ok) {
-        const data = await response.json();
-        console.log("Server response:", data);
-      }
-
-      console.log("Signup successful:", data);
-      alert("Signup successful! Please login.");
-      document.getElementById("signupForm").style.display = "none";
-      document.getElementById("loginForm").style.display = "block";
-    } catch (error) {
-      // console.error("error", error);
-      alert(error.message);
-    }
-  });
+    alert("Signup successful! Please login.");
+    signupForm.reset();
+    setAuthMode("login");
+  } catch (error) {
+    alert(error.message);
+  } finally {
+    submitButton.disabled = false;
+  }
+});
